@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Revieweroo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .review {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .review a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+        .review a:hover {
+            text-decoration: underline;
+        }
+        .source {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .trusted-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-left: 8px;
+        }
+        .ratings {
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Revieweroo - your music sidekick</h1>
+    {% for review in reviews %}
+    <div class="review">
+        <a href="{{ review.url }}">{{ review.title }}</a> by {{ review.artist }}
+        {% if review.trusted %}
+            <span class="trusted-badge">Trusted</span>
+        {% endif %}
+        
+        <div class="ratings">
+            {% if review.trusted %}
+                Pitchfork: {{ review.rating }}/10 • Metacritic: {{ review.metacritic_rating }}/100
+            {% else %}
+                {% if review.source == 'Pitchfork' %}
+                    {{ review.rating }}/10
+                {% else %}
+                    {{ review.rating }}/100
+                {% endif %}
+                ({{ review.source }})
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html> 
