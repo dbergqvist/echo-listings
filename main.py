@@ -5,7 +5,6 @@ import os
 
 app = Flask(__name__)
 
-# ... rest of your code stays the same ...
 
 def scrape_pitchfork():
     reviews = []
